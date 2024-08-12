@@ -1,1 +1,27 @@
 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+spec:
+  replicas: 2  # Number of replicas to run
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: myapp:latest # Example as demo image name, make sure to use correct image name hosted any private/public container registry
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "512Mi" # Request Memory
+            cpu: "500m"  
+          limits:
+            memory: "1Gi" # Max Dynamic memory allocated
+            cpu: "1"
